@@ -4,52 +4,57 @@ class Program
 {
     static void Main()
     {
-        int rows, cols;
+        int r1, c1, r2, c2;
 
-        Console.Write("Enter number of rows: ");
-        rows = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter rows and columns of first matrix: ");
+        r1 = Convert.ToInt32(Console.ReadLine());
+        c1 = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write("Enter number of columns: ");
-        cols = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter rows and columns of second matrix: ");
+        r2 = Convert.ToInt32(Console.ReadLine());
+        c2 = Convert.ToInt32(Console.ReadLine());
 
-        int[,] a = new int[rows, cols];
-        int[,] b = new int[rows, cols];
-        int[,] sum = new int[rows, cols];
-
-        Console.WriteLine("Enter elements of first matrix:");
-        for (int i = 0; i < rows; i++)
+        if (c1 != r2)
         {
-            for (int j = 0; j < cols; j++)
-            {
+            Console.WriteLine("Matrix multiplication not possible!");
+            return;
+        }
+
+        int[,] a = new int[r1, c1];
+        int[,] b = new int[r2, c2];
+        int[,] result = new int[r1, c2];
+
+        Console.WriteLine("Enter first matrix elements:");
+        for (int i = 0; i < r1; i++)
+            for (int j = 0; j < c1; j++)
                 a[i, j] = Convert.ToInt32(Console.ReadLine());
-            }
-        }
 
-        Console.WriteLine("Enter elements of second matrix:");
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
+        Console.WriteLine("Enter second matrix elements:");
+        for (int i = 0; i < r2; i++)
+            for (int j = 0; j < c2; j++)
                 b[i, j] = Convert.ToInt32(Console.ReadLine());
+
+        // Matrix Multiplication
+        for (int i = 0; i < r1; i++)
+        {
+            for (int j = 0; j < c2; j++)
+            {
+                result[i, j] = 0;
+
+                for (int k = 0; k < c1; k++)
+                {
+                    result[i, j] += a[i, k] * b[k, j];
+                }
             }
         }
 
-        // Matrix Addition
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                sum[i, j] = a[i, j] + b[i, j];
-            }
-        }
+        Console.WriteLine("Resultant Matrix:");
 
-        Console.WriteLine("Resultant Matrix (Sum):");
-
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < r1; i++)
         {
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < c2; j++)
             {
-                Console.Write(sum[i, j] + " ");
+                Console.Write(result[i, j] + " ");
             }
             Console.WriteLine();
         }

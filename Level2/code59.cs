@@ -13,9 +13,10 @@ class Program
         cols = Convert.ToInt32(Console.ReadLine());
 
         int[,] a = new int[rows, cols];
-        int[,] transpose = new int[cols, rows];
+        int[,] b = new int[rows, cols];
+        int[,] sum = new int[rows, cols];
 
-        Console.WriteLine("Enter matrix elements:");
+        Console.WriteLine("Enter elements of first matrix:");
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
@@ -24,22 +25,31 @@ class Program
             }
         }
 
-        // Transpose logic
+        Console.WriteLine("Enter elements of second matrix:");
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                transpose[j, i] = a[i, j];
+                b[i, j] = Convert.ToInt32(Console.ReadLine());
             }
         }
 
-        Console.WriteLine("Transpose of Matrix:");
-
-        for (int i = 0; i < cols; i++)
+        // Matrix Addition
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < rows; j++)
+            for (int j = 0; j < cols; j++)
             {
-                Console.Write(transpose[i, j] + " ");
+                sum[i, j] = a[i, j] + b[i, j];
+            }
+        }
+
+        Console.WriteLine("Resultant Matrix (Sum):");
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Console.Write(sum[i, j] + " ");
             }
             Console.WriteLine();
         }
